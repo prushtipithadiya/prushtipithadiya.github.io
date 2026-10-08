@@ -1,0 +1,45 @@
+﻿@inject NavigationManager Nav
+@inject SiteService Cfg
+@implements IDisposable
+
+<header class="nav glass">
+    <a class="logo" href="">@Cfg.C.ShortName<span>.</span></a>
+
+    <nav class="site-links" aria-label="Main">
+        <a class="site-link @Active("")" href="">Home</a>
+        <a class="site-link @Active("about")" href="about">About</a>
+        <a class="site-link @Active("projects")" href="projects">Projects</a>
+        <a class="site-link @Active("experience")" href="experience">Experience</a>
+        <a class="site-link @Active("contact")" href="contact">Contact</a>
+    </nav>
+
+    <div class="nav-actions">
+        <ThemeToggle />
+    </div>
+</header>
+
+<nav class="tabbar glass" aria-label="Mobile">
+    <a class="@Active("")" href=""><span>🏠</span>Home</a>
+    <a class="@Active("about")" href="about"><span>👤</span>About</a>
+    <a class="@Active("projects")" href="projects"><span>🚀</span>Projects</a>
+    <a class="@Active("experience")" href="experience"><span>💼</span>Experience</a>
+    <a class="@Active("contact")" href="contact"><span>✉️</span>Contact</a>
+</nav>
+
+@code {
+    protected override void OnInitialized() => Nav.LocationChanged += OnLocationChanged;
+
+    private void OnLocationChanged(object? sender, Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs e)
+        => InvokeAsync(StateHasChanged);
+
+    private string Active(string page)
+    {
+        var current = Nav.ToBaseRelativePath(Nav.Uri).Split('?', '#')[0].Trim('/');
+        var isActive = page == ""
+            ? current == ""
+            : current == page || current.StartsWith(page + "/");
+        return isActive ? "active" : "";
+    }
+
+    public void Dispose() => Nav.LocationChanged -= OnLocationChanged;
+}

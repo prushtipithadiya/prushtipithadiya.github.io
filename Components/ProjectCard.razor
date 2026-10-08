@@ -1,0 +1,24 @@
+﻿<article class="card glass reveal">
+    <h3>@Project.Title</h3>
+    <p>@Project.Description</p>
+    <div class="badges">
+        @foreach (var t in Project.Tech)
+        {
+            <SkillBadge Text="@t" />
+        }
+    </div>
+    <div class="card-links">
+        @if (Project.GitHub is not null)
+        {
+            <a href="@Project.GitHub" target="_blank" rel="noopener">GitHub ↗</a>
+        }
+        @if (Project.LiveUrl is not null)
+        {
+            <a href="@Project.LiveUrl" target="_blank" rel="noopener">Live ↗</a>
+        }
+    </div>
+</article>
+
+@code {
+    [Parameter, EditorRequired] public Project Project { get; set; } = default!;
+}

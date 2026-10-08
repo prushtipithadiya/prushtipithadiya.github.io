@@ -1,0 +1,60 @@
+﻿{
+    "name": "Prushti Pithadiya",
+    "shortName": "PP",
+    "jobTitle": "Senior Web Developer",
+    "company": "Sky9 IT Craft",
+    "status": "Working at Sky9 IT Craft",
+    "intro": "I build and maintain web applications with C#, .NET and Blazor, with a focus on clean, maintainable code and good teamwork.",
+    "typingWords": [ "Senior Web Developer", "C# & .NET 9", "Blazor Developer" ],
+    "careerStart": "2024-07-01",
+    "featuredCount": 3,
+    "email": "prushtipithadiya007@gmail.com",
+    "gitHubUser": "prushtipithadiya",
+    "linkedIn": "https://www.linkedin.com/in/YOUR_PROFILE",
+    "web3FormsKey": "1fe2eca2-afa8-46b6-9d08-be02f35fb692",
+    "footerText": "Built with Blazor & .NET 9",
+    "stack": [ "C#", ".NET 9", "Blazor", "Entity Framework", "SQL Server", "Azure", "Clean Architecture", "GitHub", "HTML", "CSS", "Bootstrap", "JavaScript", "pgAdmin", "SSMS" ],
+    "code": [
+        {
+            "key": "Role",
+            "value": "Senior Web Developer"
+        },
+        {
+            "key": "Company",
+            "value": "Sky9 IT Craft"
+        },
+        {
+            "key": "Stack",
+            "value": ".NET 9, Blazor, C#"
+        },
+        {
+            "key": "Data",
+            "value": "EF, SQL Server"
+        },
+        {
+            "key": "Cloud",
+            "value": "Azure"
+        },
+        {
+            "key": "Degree",
+            "value": "B.E. Computer Engineering"
+        }
+    ],
+    "whatIDo": [
+        {
+            "icon": "🧩",
+            "title": "Web applications",
+            "text": "Building and maintaining web applications with Blazor and C#."
+        },
+        {
+            "icon": "🏗️",
+            "title": "Clean, maintainable code",
+            "text": ".NET Core 7/8/9 with Clean Architecture, code reviews and teamwork."
+        },
+        {
+            "icon": "☁️",
+            "title": "Data and cloud",
+            "text": "Entity Framework, SQL Server and Microsoft Azure."
+        }
+    ]
+}

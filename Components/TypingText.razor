@@ -1,0 +1,32 @@
+﻿@implements IDisposable
+
+<span>@_text</span><span class="caret">|</span>
+
+@code {
+    [Parameter] public string[] Words { get; set; } = [];
+    private string _text = "";
+    private readonly CancellationTokenSource _cts = new();
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender && Words.Length > 0) _ = RunAsync(_cts.Token);
+    }
+
+    private async Task RunAsync(CancellationToken ct)
+    {
+        var i = 0;
+        try
+        {
+            while (!ct.IsCancellationRequested)
+            {
+                var word = Words[i++ % Words.Length];
+                for (var c = 1; c <= word.Length; c++) { _text = word[..c]; StateHasChanged(); await Task.Delay(80, ct); }
+                await Task.Delay(1400, ct);
+                for (var c = word.Length; c >= 0; c--) { _text = word[..c]; StateHasChanged(); await Task.Delay(40, ct); }
+            }
+        }
+        catch (TaskCanceledException) { }
+    }
+
+    public void Dispose() => _cts.Cancel();
+}

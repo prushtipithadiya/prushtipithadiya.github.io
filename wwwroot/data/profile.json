@@ -1,0 +1,41 @@
+﻿{
+    "bio": "I'm a Computer Engineering graduate from Gujarat Technological University. I've worked at Sky9 IT Craft since July 2024 and currently work as a Senior Web Developer, building and maintaining web applications with C#, .NET and Blazor. I care about clean, maintainable code and good teamwork.",
+    "education": [
+        {
+            "title": "Bachelor of Engineering in Computer Engineering",
+            "place": "Gujarat Technological University",
+            "period": "2021 – 2025",
+            "score": "CGPA 8.43"
+        },
+        {
+            "title": "Science Stream (A Group)",
+            "place": "Shri Bhushan Schools",
+            "period": "May 2021",
+            "score": "96.03 PR"
+        },
+        {
+            "title": "Shri Navyug Primary Schools",
+            "place": null,
+            "period": "March 2019",
+            "score": "99.03 PR"
+        }
+    ],
+    "skills": {
+        "Backend & Frameworks": [ ".NET Core 7/8/9", "C#", "Blazor", "Entity Framework", "Clean Architecture" ],
+        "Frontend": [ "HTML", "CSS", "Bootstrap", "JavaScript" ],
+        "Database & Cloud": [ "SQL Server", "Microsoft Azure" ],
+        "Tools": [ "SSMS", "pgAdmin", "GitHub" ]
+    },
+    "softSkills": [ "Teamwork", "Leadership", "Communication", "Presentation", "Creativity" ],
+    "languages": [ "English", "Hindi", "Gujarati" ],
+    "achievements": [
+        {
+            "title": "GDSC Social Media Leader",
+            "description": "Led the club's online presence, promoted educational events and helped build an engaged tech community."
+        },
+        {
+            "title": "AIU Pistol Shooting Certified",
+            "description": "Successfully completed the AIU Pistol Shooting certification."
+        }
+    ]
+}

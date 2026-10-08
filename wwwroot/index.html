@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Prushti Pithadiya | Senior Web Developer</title>
+    <meta name="description" content="Portfolio of Prushti Pithadiya, Senior Web Developer specialising in C#, .NET and Blazor." />
+    <base href="/" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/app.css" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👩‍💻</text></svg>" />
+    <script>
+        // Dark by default; only use light if the visitor chose it before
+        (function () {
+            var t = 'dark';
+            try { if (localStorage.getItem('theme') === 'light') t = 'light'; } catch (e) { }
+            document.documentElement.setAttribute('data-theme', t);
+        })();
+    </script>
+</head>
+<body>
+    <div id="app">
+        <div class="loader"><div class="spinner"></div><p>Loading portfolio…</p></div>
+    </div>
+    <div id="blazor-error-ui">
+        An unhandled error has occurred. <a href="." class="reload">Reload</a> <span class="dismiss">🗙</span>
+    </div>
+    <script src="js/interop.js"></script>
+    <script src="_framework/blazor.webassembly.js"></script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+﻿@page "/projects"
+@using System.Net.Http.Json
+@inject HttpClient Http
+@inject SiteService Cfg
+
+<PageTitle>Projects | Prushti Pithadiya</PageTitle>
+
+<section class="section">
+    <h2 class="reveal">Projects</h2>
+
+    <div class="chips reveal">
+        <button class="chip @(_tag is null ? "active" : "")" @onclick="() => _tag = null">All</button>
+        @foreach (var t in _tags)
+        {
+            <button class="chip @(_tag == t ? "active" : "")" @onclick="() => _tag = t">@t</button>
+        }
+    </div>
+
+    <div class="grid">
+        @foreach (var p in Visible) { <ProjectCard Project="p" /> }
+    </div>
+</section>
+
+<section class="section">
+    <h2 class="reveal">Latest on GitHub</h2>
+    @if (_repos is null)
+    {
+        <p class="muted">Loading repositories…</p>
+    }
+    else if (_repos.Length == 0)
+    {
+        <p class="muted">Couldn't load repositories right now.</p>
+    }
+    else
+    {
+        <div class="grid">
+            @foreach (var r in _repos)
+            {
+                <article class="card glass reveal">
+                    <h3>@r.Name</h3>
+                    <p>@(r.Description ?? "No description")</p>
+                    <div class="badges">
+                        @if (r.Language is not null) { <SkillBadge Text="@r.Language" /> }
+                        <SkillBadge Text="@($"★ {r.Stars}")" />
+                    </div>
+                    <div class="card-links"><a href="@r.HtmlUrl" target="_blank" rel="noopener">View repo ↗</a></div>
+                </article>
+            }
+        </div>
+    }
+</section>
+
+@code {
+    private Project[] _projects = [];
+    private string[] _tags = [];
+    private string? _tag;
+    private GitHubRepo[]? _repos;
+
+    private IEnumerable<Project> Visible =>
+        _tag is null ? _projects : _projects.Where(p => p.Tech.Contains(_tag));
+
+    protected override async Task OnInitializedAsync()
+    {
+        _projects = await Http.GetFromJsonAsync<Project[]>("data/projects.json") ?? [];
+        _tags = _projects.SelectMany(p => p.Tech).Distinct().Order().ToArray();
+        _ = LoadReposAsync();
+    }
+
+    private async Task LoadReposAsync()
+    {
+        try
+        {
+            var all = await Http.GetFromJsonAsync<GitHubRepo[]>(
+                $"https://api.github.com/users/{Cfg.C.GitHubUser}/repos?sort=updated&per_page=12") ?? [];
+            _repos = all.Where(r => !r.Fork).Take(6).ToArray();
+        }
+        catch { _repos = []; }
+        StateHasChanged();
+    }
+}

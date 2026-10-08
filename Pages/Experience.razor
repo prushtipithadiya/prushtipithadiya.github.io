@@ -1,0 +1,43 @@
+﻿@page "/experience"
+@using System.Net.Http.Json
+@inject HttpClient Http
+
+<PageTitle>Experience | Prushti Pithadiya</PageTitle>
+
+<section class="section">
+    <h2 class="reveal">Experience</h2>
+    @if (_companies is null)
+    {
+        <p class="muted">Loading…</p>
+    }
+    else
+    {
+        @foreach (var c in _companies)
+        {
+            <h3 class="reveal">@c.Name</h3>
+            <div class="badges reveal">
+                @foreach (var t in c.Tech) { <SkillBadge Text="@t" /> }
+            </div>
+
+            <div class="timeline">
+                @foreach (var r in c.Roles)
+                {
+                    <div class="role reveal">
+                        <h3>@r.Title</h3>
+                        <p class="period">@r.Period</p>
+                        <ul>@foreach (var pt in r.Points) { <li>@pt</li> }</ul>
+                    </div>
+                }
+            </div>
+        }
+
+        <a class="btn primary reveal" href="resume.pdf" target="_blank" rel="noopener">View full resume</a>
+    }
+</section>
+
+@code {
+    private Company[]? _companies;
+
+    protected override async Task OnInitializedAsync()
+        => _companies = await Http.GetFromJsonAsync<Company[]>("data/experience.json");
+}

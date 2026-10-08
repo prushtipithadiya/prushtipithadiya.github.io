@@ -1,0 +1,23 @@
+﻿[
+    {
+        "title": "Project One",
+        "description": "Short description of what it does and the problem it solves.",
+        "tech": [ "Blazor", "C#", "SQL Server" ],
+        "github": "https://github.com/YOUR_GITHUB_USERNAME/project-one",
+        "liveUrl": null
+    },
+    {
+        "title": "Project Two",
+        "description": "Short description of what it does and the problem it solves.",
+        "tech": [ "C#", "Entity Framework", "Azure" ],
+        "github": "https://github.com/YOUR_GITHUB_USERNAME/project-two",
+        "liveUrl": null
+    },
+    {
+        "title": "Project Three",
+        "description": "Short description of what it does and the problem it solves.",
+        "tech": [ "HTML", "CSS", "Bootstrap" ],
+        "github": "https://github.com/YOUR_GITHUB_USERNAME/project-three",
+        "liveUrl": null
+    }
+]

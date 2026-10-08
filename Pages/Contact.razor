@@ -1,0 +1,54 @@
+﻿@page "/contact"
+@using System.Net.Http.Json
+@using Microsoft.AspNetCore.Components.Forms
+@inject HttpClient Http
+@inject SiteService Cfg
+
+<PageTitle>Contact | @Cfg.C.Name</PageTitle>
+
+<section class="section">
+    <h2 class="reveal">Get in touch</h2>
+
+    <div class="contact-links reveal">
+        <a class="btn" href="mailto:@Cfg.C.Email">✉ Email</a>
+        <a class="btn" href="@Cfg.C.LinkedIn" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a class="btn" href="https://github.com/@Cfg.C.GitHubUser" target="_blank" rel="noopener">GitHub ↗</a>
+    </div>
+
+    <EditForm Model="_form" OnValidSubmit="SendAsync" class="form glass reveal">
+        <DataAnnotationsValidator />
+        <label>Name <InputText @bind-Value="_form.Name" /></label>
+        <ValidationMessage For="() => _form.Name" />
+        <label>Email <InputText @bind-Value="_form.Email" /></label>
+        <ValidationMessage For="() => _form.Email" />
+        <label>Message <InputTextArea rows="5" @bind-Value="_form.Message" /></label>
+        <ValidationMessage For="() => _form.Message" />
+        <button class="btn primary" disabled="@_sending">@(_sending ? "Sending…" : "Send message")</button>
+        @if (_status is not null) { <p>@_status</p> }
+    </EditForm>
+</section>
+
+@code {
+    private ContactForm _form = new();
+    private bool _sending;
+    private string? _status;
+
+    private async Task SendAsync()
+    {
+        _sending = true; _status = null;
+        try
+        {
+            var res = await Http.PostAsJsonAsync("https://api.web3forms.com/submit", new
+            {
+                access_key = Cfg.C.Web3FormsKey,
+                name = _form.Name,
+                email = _form.Email,
+                message = _form.Message
+            });
+            if (res.IsSuccessStatusCode) { _status = "Thanks! Your message was sent."; _form = new(); }
+            else _status = "Something went wrong. Please email me directly.";
+        }
+        catch { _status = "Network error. Please try again or email me directly."; }
+        _sending = false;
+    }
+}

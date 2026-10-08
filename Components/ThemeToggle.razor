@@ -1,0 +1,12 @@
+﻿@inject ThemeService Theme
+@implements IDisposable
+
+<button type="button" class="icon-btn" data-theme-toggle title="Toggle theme" aria-label="Toggle theme">
+    <span class="icon-sun">☀️</span><span class="icon-moon">🌙</span>
+</button>
+
+@code {
+    protected override void OnInitialized() => Theme.Changed += OnChanged;
+    private void OnChanged() => InvokeAsync(StateHasChanged);
+    public void Dispose() => Theme.Changed -= OnChanged;
+}

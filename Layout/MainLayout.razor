@@ -1,0 +1,27 @@
+﻿@using Microsoft.JSInterop
+@inherits LayoutComponentBase
+@inject IJSRuntime JS
+@inject ThemeService Theme
+@inject SiteService Cfg
+
+<div class="bg-blobs"></div>
+<Navbar />
+<main class="container">@Body</main>
+<footer class="footer">© @DateTime.Now.Year @Cfg.C.Name · @Cfg.C.FooterText</footer>
+
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!firstRender) return;
+        try
+        {
+            await JS.InvokeVoidAsync("portfolio.initReveal");
+            await JS.InvokeVoidAsync("portfolio.initProgress");
+            await Theme.InitAsync();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"JS init failed: {ex.Message}");
+        }
+    }
+}

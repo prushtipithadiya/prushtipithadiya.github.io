@@ -1,0 +1,51 @@
+﻿[
+    {
+        "name": "Sky9 IT Craft",
+        "tech": [ ".NET Core 7/8/9", "C#", "Blazor", "Entity Framework", "SQL Server", "Azure", "GitHub" ],
+        "roles": [
+            {
+                "title": "Software Development",
+                "period": "07/2024 – Present",
+                "points": [
+                    "Developed and maintained web applications using Blazor and C#.",
+                    "Collaborated with team members to design and implement new features.",
+                    "Participated in code reviews and optimized application performance.",
+                    "Built applications with .NET Core 7, 8, and 9 following Clean Architecture principles.",
+                    "Worked with Entity Framework and SQL Server to manage application data.",
+                    "Used GitHub for version control and team collaboration."
+                ]
+            }
+        ]
+    },
+    {
+        "name": "BharatIntern",
+        "tech": [ "HTML", "CSS" ],
+        "roles": [
+            {
+                "title": "Web Development – Intern",
+                "period": "06/2023 – 07/2023",
+                "points": [
+                    "Portfolio & Netflix Homepage",
+                    "Developed using HTML/CSS",
+                    "Enhanced user experience with responsive layout",
+                    "Utilized CSS grid/flexbox for layout and responsiveness"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Letsgrowmore",
+        "tech": [ "HTML", "CSS", "JavaScript", "Create React App" ],
+        "roles": [
+            {
+                "title": "Web Development – Intern",
+                "period": "08/2023 – 09/2023",
+                "points": [
+                    "Calculator, Create-React-App, To-Do List WebApp",
+                    "Developed using HTML/CSS/JS.",
+                    "Enhanced user experience with clean design and responsive layout."
+                ]
+            }
+        ]
+    }
+]

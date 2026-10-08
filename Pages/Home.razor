@@ -1,0 +1,80 @@
+﻿@page "/"
+@using System.Net.Http.Json
+@inject HttpClient Http
+@inject SiteService Cfg
+
+<PageTitle>@Cfg.C.Name | @Cfg.C.JobTitle</PageTitle>
+
+<section class="hero2">
+    <div class="hero-text">
+        <span class="status reveal"><i class="dot"></i> @Cfg.C.Status</span>
+        <h1 class="reveal">Hi, I'm <span class="grad">@Cfg.C.Name</span></h1>
+        <p class="role-line reveal"><TypingText Words="Cfg.C.TypingWords" /></p>
+        <p class="muted lead reveal">@Cfg.C.Intro</p>
+        <div class="hero-actions reveal">
+            <a class="btn primary" href="projects">View projects</a>
+            <a class="btn" href="resume.pdf" target="_blank" rel="noopener">View resume</a>
+            <a class="btn" href="contact">Contact me</a>
+        </div>
+    </div>
+
+    <div class="code-win glass reveal" aria-hidden="true">
+        <div class="code-bar"><i></i><i></i><i></i><span>@(Cfg.C.Name.Replace(" ", "")).cs</span></div>
+        <div class="code-body">
+            <div><span class="k">public class</span> <span class="t">@Cfg.C.Name.Replace(" ", "")</span> : <span class="t">Developer</span></div>
+            <div>{</div>
+            @foreach (var l in Cfg.C.Code)
+            {
+                <div class="ind"><span class="k">@l.Key</span> = <span class="s">"@l.Value"</span>;</div>
+            }
+            <div>}</div>
+        </div>
+    </div>
+</section>
+
+<section class="stats">
+    <div class="stat glass reveal"><b data-count="@_years" data-suffix="+">@_years+</b><span>Years at @Cfg.C.Company</span></div>
+    <div class="stat glass reveal"><b data-count="@Cfg.C.Stack.Length" data-suffix="+">@(Cfg.C.Stack.Length)+</b><span>Technologies</span></div>
+</section>
+
+<div class="marquee reveal" aria-hidden="true">
+    <div class="marquee-track">
+        @for (var n = 0; n < 2; n++)
+        {
+            foreach (var s in Cfg.C.Stack) { <span>@s</span> }
+        }
+    </div>
+</div>
+
+<section class="section">
+    <h2 class="reveal">What I do</h2>
+    <div class="grid">
+        @foreach (var c in Cfg.C.WhatIDo)
+        {
+            <div class="card glass reveal"><h3>@c.Icon @c.Title</h3><p>@c.Text</p></div>
+        }
+    </div>
+</section>
+
+<section class="section">
+    <h2 class="reveal">Featured projects</h2>
+    <div class="grid">
+        @foreach (var p in _featured) { <ProjectCard Project="p" /> }
+    </div>
+    <p class="reveal" style="margin-top:20px"><a href="projects">See all projects →</a></p>
+</section>
+
+@code {
+    private Project[] _featured = [];
+    private int _years;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var start = DateTime.TryParse(Cfg.C.CareerStart, out var d) ? d : DateTime.Now;
+        var months = (DateTime.Now.Year - start.Year) * 12 + DateTime.Now.Month - start.Month;
+        _years = Math.Max(1, months / 12);
+
+        var all = await Http.GetFromJsonAsync<Project[]>("data/projects.json") ?? [];
+        _featured = all.Take(Cfg.C.FeaturedCount).ToArray();
+    }
+}
