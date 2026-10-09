@@ -77,5 +77,5 @@ Every push to `main` triggers the GitHub Actions workflow in `.github/workflows/
 ## Contact
 
 - Email: prushtipithadiya007@gmail.com
-- LinkedIn: add your profile link
+- LinkedIn: https://www.linkedin.com/in/prushti-pithadiya
 - GitHub: https://github.com/prushtipithadiya
